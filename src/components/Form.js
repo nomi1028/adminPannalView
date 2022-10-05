@@ -96,7 +96,8 @@ const FormLayoutsSeparator = ({
     //     console.log(err);
     //   });
     const res = await axios.post(
-      "http://localhost:5000/student",
+      // "http://localhost:5000/student",
+      "https://nfttrader1.herokuapp.com/student",
       {
         nftnname,
         Tokenname,

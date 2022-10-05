@@ -104,7 +104,8 @@ const TableStickyHeader = (props) => {
     },
   }));
   const getdata = () => {
-    axios.get("http://localhost:5000/student").then((res) => {
+    // axios.get("http://localhost:5000/student").then((res) => {
+    axios.get("https://nfttrader1.herokuapp.com/student").then((res) => {
       const persons = res.data.User_Data;
       if (persons) {
         console.log(persons);
@@ -134,11 +135,14 @@ const TableStickyHeader = (props) => {
     const NewArray = tableData?.map((e) => {
       if (id === e._id) {
         console.log(id, "id");
-        axios.delete(`http://localhost:5000/student/${id}`).then((res) => {
-          if (res) {
-            getdata();
-          }
-        });
+        // axios.delete(`http://localhost:5000/student/${id}`).then((res) => {
+        axios
+          .delete(`https://nfttrader1.herokuapp.com/student/${id}`)
+          .then((res) => {
+            if (res) {
+              getdata();
+            }
+          });
       }
       return e;
     });

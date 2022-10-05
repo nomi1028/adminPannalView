@@ -89,7 +89,8 @@ const Update = ({ editData }) => {
     //     console.log(err);
     //   });
     const res = await axios.patch(
-      `http://localhost:5000/student/${editData?._id}`,
+      // `http://localhost:5000/student/${editData?._id}`,
+      `https://nfttrader1.herokuapp.com/student/${editData?._id}`,
       { nftnname, Tokenname, Coinname, Nftadress, trade, AdminWallet }
       //   {
       //     headers: {
