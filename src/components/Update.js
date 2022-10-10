@@ -38,7 +38,6 @@ const CustomInput = forwardRef((props, ref) => {
 });
 
 const Update = ({ editData }) => {
-  console.log(editData, "editData");
   // ** States
 
   const [trade, setTradeNbr] = useState(editData?.trade);
@@ -63,65 +62,16 @@ const Update = ({ editData }) => {
   };
 
   const submit = async (event) => {
-    // formData.append("nftnname", nftnname);
-    // formData.append("Tokenname", Tokenname);
-    // formData.append("Coinname", Coinname);
-    // formData.append("Nftadress", Nftadress);
-    // console.log(formData, "formData");
     event.preventDefault();
-    console.log(editData?._id, "editData?._id");
 
-    // axios
-    //   .post(
-    //     "http://localhost:5000/student",
-    //     { body: nftnname },
-    //     {
-    //       headers: {
-    //         "content-type": "multipart/form-data",
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     const persons = res.data;
-    //     console.log(persons);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
     const res = await axios.patch(
-      // `http://localhost:5000/student/${editData?._id}`,
       `https://nfttrader1.herokuapp.com/student/${editData?._id}`,
       { nftnname, Tokenname, Coinname, Nftadress, trade, AdminWallet }
-      //   {
-      //     headers: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   }
     );
     if (res) {
       window.location.reload();
     }
   };
-  //   const submit = event => {
-
-  //     event.preventDefault()
-  //     if(props){
-  //       console.log(props,"kjjhk")
-  //     }
-
-  //     axios.patch(`http://localhost:3000/api/Client/${props?.data._id}`, formData, {
-  //     //   headers: {
-  //     //     'content-type': 'multipart/form-data'
-  //     //   },
-  //     //   mode: 'no-cors'
-  //     }).then(res => {
-  //       const persons = res.data.Clients_Data;
-  //       if(persons){
-  //        window.location.reload();
-
-  //       }
-  //     })
-  //   }
 
   return (
     <Card>

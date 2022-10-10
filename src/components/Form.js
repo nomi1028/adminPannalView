@@ -44,7 +44,6 @@ const FormLayoutsSeparator = ({
   adress,
   Tradenbr,
 }) => {
-  console.log(takerAssets, "formdata");
   const navigate = useNavigate();
   // ** States
 
@@ -76,7 +75,6 @@ const FormLayoutsSeparator = ({
     formData.append("Tokenname", Tokenname);
     formData.append("Coinname", Coinname);
     formData.append("Nftadress", Nftadress);
-    console.log(formData, "formData");
     event.preventDefault();
     // axios
     //   .post(

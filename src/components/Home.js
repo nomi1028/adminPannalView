@@ -90,7 +90,6 @@ function Home() {
 
   useEffect(() => {
     if (account) {
-      console.log(account, "nomi");
       var tempArray = [];
       axios
         .get(
@@ -119,8 +118,6 @@ function Home() {
     }
   }, [account]);
 
-  console.log(data, "dataofapi");
-
   async function connect() {
     try {
       await activate(injected);
@@ -138,7 +135,6 @@ function Home() {
       console.log(ex);
     }
   }
-  console.log(SignleData, "single");
 
   return (
     <>

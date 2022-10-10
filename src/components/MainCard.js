@@ -18,89 +18,68 @@ export default function MainCard({
   setmakerAdress,
   setTradenbr,
 }) {
-  console.log(cardData, "jhyguug");
   const [id, setId] = React.useState();
+  const [makerType, setMakerType] = React.useState();
+  const [takerType, setTakerType] = React.useState();
   const [taker, setTakerData] = React.useState();
   const [metaid, setmetamaskID] = React.useState();
   const [tokenAdress, settokenAdress] = React.useState();
   const [makeTokenAdress, setMakertokenAdress] = React.useState();
   const [tradecode, setTradeCode] = React.useState();
+  const [wantVariable, setWantVariable] = React.useState();
+  const [wantMetamaskid, setWantMetamaskid] = React.useState();
+  const [wantData, setWantData] = React.useState();
 
   const [Data, setData] = React.useState();
-  // const formData = new FormData();
-  // formData.append("description", tokenAdress);
-  // formData.append("company_Name", makeTokenAdress);
-  // const submit = event => {
-  //   event.preventDefault()
-  //   axios.post('http://localhost:5000/api/student/', formData, {
-  //     headers: {
-  //       'content-type': 'multipart/form-data'
-  //     },
-  //     mode: 'no-cors'
-  //   }).then(res => {
-  //     console.log(res)
-
-  //   })
-  // }
 
   React.useEffect(() => {
     let variable = cardData?.HaveAssets?.slice(0, 42);
     let metamaskid = cardData?.HaveAssets?.slice(42);
 
-    let jsonData = JSON.parse(cardData?.Order);
+    setWantVariable(cardData?.WantAssets?.slice(0, 42));
+    setWantMetamaskid(cardData?.WantAssets?.slice(42));
 
-    let jsonArrayData = jsonData.takerAssetData.split("");
-    var tempArray = [];
-    var anotherTempArray = [];
-    jsonArrayData.map((char) => {
-      if (char == 0) {
-        anotherTempArray.push(char);
-        if (anotherTempArray.length >= 3) {
-          tempArray = [];
+    if (cardData?.Status === "FILLED") {
+      let jsonData = JSON.parse(cardData?.Order);
+
+      let jsonArrayData = jsonData.takerAssetData.split("");
+      var tempArray = [];
+      var anotherTempArray = [];
+      jsonArrayData.map((char) => {
+        if (char == 0) {
+          anotherTempArray.push(char);
+          if (anotherTempArray.length >= 3) {
+            tempArray = [];
+            anotherTempArray = [];
+          }
+        } else {
           anotherTempArray = [];
         }
-      } else {
-        anotherTempArray = [];
-      }
 
-      tempArray.push(char);
+        tempArray.push(char);
 
-      if (tempArray.length >= 40 && tempArray.length <= 44) {
-        var stringData = tempArray.join("");
-        for (let i = 0; i < stringData.length; i++) {
-          // console.log(stringData.length, "stringData");
-          if (i < 2) {
-            if (stringData.charAt(0) == 0) {
-              stringData = stringData.substring(1);
-            }
-            if (i > 40) {
-              if (stringData.charAt(40) == 0) {
-                stringData = stringData = stringData.substring(41, 1);
+        if (tempArray.length >= 40 && tempArray.length <= 44) {
+          var stringData = tempArray.join("");
+          for (let i = 0; i < stringData.length; i++) {
+            if (i < 2) {
+              if (stringData.charAt(0) == 0) {
+                stringData = stringData.substring(1);
+              }
+              if (i > 40) {
+                if (stringData.charAt(40) == 0) {
+                  stringData = stringData = stringData.substring(41, 1);
+                }
               }
             }
           }
+          if (stringData.length === 40) {
+            settokenAdress("0x" + stringData);
+          }
         }
-        if (stringData.length === 40) {
-          console.log("0x" + stringData, "tempArray");
-          settokenAdress("0x" + stringData);
-        }
-      }
-
-      // if (char != 0) {
-      //   tempArray.push(char);
-      //   anotherTempArray = [];
-      // } else {
-      //   if (tempArray.length > 34) {
-      //     console.log("0x" + tempArray.join("").slice(0, 35), "tempArray");
-      //   } else {
-      //     anotherTempArray.push(char);
-      //     if (anotherTempArray.length > 3) {
-      //       tempArray = [];
-      //       anotherTempArray = [];
-      //     }
-      //   }
-      // }
-    });
+      });
+    } else {
+      settokenAdress(cardData?.WantAssets);
+    }
     if (variable && metamaskid) {
       setId(variable);
       setmetamaskID(metamaskid);
@@ -109,62 +88,64 @@ export default function MainCard({
   React.useEffect(() => {
     let result = cardData?.AccountId.concat(cardData?.OrderId);
     setTradeCode(result);
-    console.log(result, "orderid");
-    let jsonData = JSON.parse(cardData?.Order);
 
-    let jsonArrayData = jsonData.makerAssetData.split("");
-    var tempArray = [];
-    var anotherTempArray = [];
-    jsonArrayData.map((char) => {
-      if (char == 0) {
-        anotherTempArray.push(char);
-        if (anotherTempArray.length >= 3) {
-          tempArray = [];
+    if (cardData?.Status === "FILLED") {
+      let jsonData = JSON.parse(cardData?.Order);
+
+      let jsonArrayData = jsonData.makerAssetData.split("");
+      var tempArray = [];
+      var anotherTempArray = [];
+      jsonArrayData.map((char) => {
+        if (char == 0) {
+          anotherTempArray.push(char);
+          if (anotherTempArray.length >= 3) {
+            tempArray = [];
+            anotherTempArray = [];
+          }
+        } else {
           anotherTempArray = [];
         }
-      } else {
-        anotherTempArray = [];
-      }
 
-      tempArray.push(char);
+        tempArray.push(char);
 
-      if (tempArray.length >= 40 && tempArray.length <= 44) {
-        var stringData = tempArray.join("");
-        for (let i = 0; i < stringData.length; i++) {
-          console.log(stringData.length, "stringData");
-          if (i < 2) {
-            if (stringData.charAt(0) == 0) {
-              stringData = stringData.substring(1);
-            }
-            if (i > 40) {
-              if (stringData.charAt(40) == 0) {
-                stringData = stringData = stringData.substring(41, 1);
+        if (tempArray.length >= 40 && tempArray.length <= 44) {
+          var stringData = tempArray.join("");
+          for (let i = 0; i < stringData.length; i++) {
+            if (i < 2) {
+              if (stringData.charAt(0) == 0) {
+                stringData = stringData.substring(1);
+              }
+              if (i > 40) {
+                if (stringData.charAt(40) == 0) {
+                  stringData = stringData = stringData.substring(41, 1);
+                }
               }
             }
           }
+          if (stringData.length === 40) {
+            setMakertokenAdress("0x" + stringData);
+          }
         }
-        if (stringData.length === 40) {
-          console.log("0x" + stringData, "tempArray");
-          setMakertokenAdress("0x" + stringData);
-        }
-      }
-
-      // if (char != 0) {
-      //   tempArray.push(char);
-      //   anotherTempArray = [];
-      // } else {
-      //   if (tempArray.length > 34) {
-      //     console.log("0x" + tempArray.join("").slice(0, 35), "tempArray");
-      //   } else {
-      //     anotherTempArray.push(char);
-      //     if (anotherTempArray.length > 3) {
-      //       tempArray = [];
-      //       anotherTempArray = [];
-      //     }
-      //   }
-      // }
-    });
+      });
+    } else {
+      setMakertokenAdress(cardData?.HaveAssets);
+    }
   }, [cardData]);
+
+  React.useEffect(() => {
+    if (makeTokenAdress && tokenAdress) {
+      if (makeTokenAdress?.length === 46) {
+        setMakerType("erc721");
+      } else {
+        setMakerType("erc20");
+      }
+      if (tokenAdress?.length === 46) {
+        setTakerType("erc721");
+      } else {
+        setTakerType("erc20");
+      }
+    }
+  }, [makeTokenAdress, tokenAdress]);
 
   React.useEffect(() => {
     if (id && metaid) {
@@ -173,9 +154,16 @@ export default function MainCard({
           `https://apl4mh4j0c.execute-api.us-west-2.amazonaws.com/Prod/api/v1/asset/${id}/${metaid}`
         )
         .then((resp) => {
-          console.log(JSON.parse(resp.data), "res");
-
           setData(JSON.parse(resp.data));
+        });
+    }
+    if (wantVariable && wantMetamaskid) {
+      axios
+        .get(
+          `https://apl4mh4j0c.execute-api.us-west-2.amazonaws.com/Prod/api/v1/asset/${wantVariable}/${wantMetamaskid}`
+        )
+        .then((resp) => {
+          setWantData(JSON.parse(resp.data));
         });
     }
   }, [id, metaid]);
@@ -214,7 +202,6 @@ export default function MainCard({
     setmakerAdress(makeTokenAdress);
     setTradenbr(tradecode);
   };
-  console.log(tokenAdress, "finalstage");
   return (
     <>
       <Card
@@ -243,42 +230,81 @@ export default function MainCard({
             lg={12}
             sx={{ paddingX: "70px", paddingY: "20px" }}
           >
-            <Grid item md={6} sm={6} lg={6}>
-              <Typography
-                variant="body2"
-                sx={{
-                  width: "170px",
-                  backgroundColor: "white",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  width: "180px",
-                  padding: "10px",
-                }}
-              >
-                <Typography variant="body2" sx={{ width: "30%" }}>
-                  <CardMedia
-                    component="img"
-                    height="45"
-                    image={taker?.image}
-                    alt="green iguana"
-                  />
-                </Typography>
-                <Typography sx={{ width: "70%", paddingLeft: "5px" }}>
-                  <Typography variant="h6" sx={{ color: "black" }}>
-                    {/* {Data?.name} */}
-                    {taker?.name}
+            {takerType === "erc721" ? (
+              <Grid item md={6} sm={6} lg={6}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    width: "170px",
+                    backgroundColor: "white",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "180px",
+                    padding: "10px",
+                  }}
+                >
+                  <Typography variant="body2" sx={{ width: "30%" }}>
+                    <CardMedia
+                      component="img"
+                      height="45"
+                      image={wantData?.image_url}
+                      alt="green iguana"
+                    />
                   </Typography>
-                  {/* <Typography variant="body2">USD Coin</Typography> */}
-                  <Typography
-                    variant="body2"
-                    sx={{ backgroundColor: "black", color: "white" }}
-                  >
-                    Type:ERC20
+                  <Typography sx={{ width: "70%", paddingLeft: "5px" }}>
+                    <Typography variant="h6" sx={{ color: "black" }}>
+                      {/* {Data?.name} */}
+                      {wantData?.name}
+                    </Typography>
+                    {/* <Typography variant="body2">USD Coin</Typography> */}
+                    <Typography
+                      variant="body2"
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    >
+                      {takerType}
+                    </Typography>
                   </Typography>
                 </Typography>
-              </Typography>
-            </Grid>
+              </Grid>
+            ) : (
+              <Grid item md={6} sm={6} lg={6}>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    width: "170px",
+                    backgroundColor: "white",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "180px",
+                    padding: "10px",
+                  }}
+                >
+                  <Typography variant="body2" sx={{ width: "30%" }}>
+                    <CardMedia
+                      component="img"
+                      height="45"
+                      image={taker?.image}
+                      alt="green iguana"
+                    />
+                  </Typography>
+                  <Typography sx={{ width: "70%", paddingLeft: "5px" }}>
+                    <Typography variant="h6" sx={{ color: "black" }}>
+                      {/* {Data?.name} */}
+                      {taker?.name}
+                    </Typography>
+                    {/* <Typography variant="body2">USD Coin</Typography> */}
+                    <Typography
+                      variant="body2"
+                      sx={{ backgroundColor: "black", color: "white" }}
+                    >
+                      {takerType}
+                    </Typography>
+                  </Typography>
+                </Typography>
+              </Grid>
+            )}
             <Grid item md={0.25} sm={12} lg={0.25}>
               <Typography variant="body2" sx={{ width: "30%" }}>
                 <CompareArrowsIcon />
@@ -315,7 +341,7 @@ export default function MainCard({
                     variant="body2"
                     sx={{ backgroundColor: "black", color: "white" }}
                   >
-                    Type:ERC721
+                    {makerType}
                   </Typography>
                 </Typography>
               </Typography>
@@ -336,7 +362,7 @@ export default function MainCard({
           <Typography component="div">For:{cardData?.Recipient}</Typography>
 
           <Typography>Status:{cardData?.Status}</Typography>
-          <Typography>Expires in:Expired</Typography>
+          {/* <Typography>Expires in:Expired</Typography> */}
         </Typography>
       </Card>
     </>

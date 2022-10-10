@@ -17,7 +17,6 @@ export default function MediaCard({
   Tradenbr,
 }) {
   const [takerAssets, SetTakeAssets] = React.useState();
-  console.log(Tradenbr, "Tradenbr");
   const record = [
     {
       tokenadress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
@@ -32,48 +31,12 @@ export default function MediaCard({
   ];
   React.useEffect(() => {
     record.map((data) => {
-      console.log(data.tokenadress);
-      console.log(adress, "adress");
       if (data.tokenadress == adress) {
-        console.log(data);
         SetTakeAssets(data);
       }
     });
   }, [adress]);
 
-  // const [id, setId] = React.useState();
-  // const [metaid, setmetamaskID] = React.useState();
-  // const [Data, setData] = React.useState();
-
-  // React.useEffect(() => {
-  //   let variable = cardData?.HaveAssets?.slice(0, 42);
-  //   let metamaskid = cardData?.HaveAssets?.slice(42);
-
-  //   console.log();
-  //   if (variable && metamaskid) {
-  //     setId(variable);
-  //     setmetamaskID(metamaskid);
-  //   }
-  // }, [cardData]);
-  // React.useEffect(() => {
-  //   if (id && metaid) {
-  //     axios
-  //       .get(
-  //         `https://apl4mh4j0c.execute-api.us-west-2.amazonaws.com/Prod/api/v1/asset/${id}/${metaid}`
-  //       )
-  //       .then((resp) => {
-  //         console.log(JSON.parse(resp.data), "res");
-
-  //         setData(JSON.parse(resp.data));
-  //       });
-  //   }
-  // }, [id, metaid]);
-
-  // const obj = JSON.parse(cardData?.Order);
-  // const enableMetamask = async () => {
-  //   let accounts = await window.ethereum.enable();
-  //   console.log(accounts[0]);
-  // };
   return (
     <>
       <Grid
@@ -115,13 +78,13 @@ export default function MediaCard({
                 >
                   {takerAssets?.name}
                 </Typography>
-                <Typography
+                {/* <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ backgroundColor: "black", color: "white" }}
                 >
                   Lizards are a widespread group of
-                </Typography>
+                </Typography> */}
               </CardContent>
 
               <Typography sx={{ display: "flex" }}>

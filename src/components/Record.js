@@ -59,8 +59,6 @@ function createData(name, code, population, size) {
 }
 
 const TableStickyHeader = (props) => {
-  console.log(props.data, "datar");
-
   // props.values(...)
 
   // ** States
@@ -80,7 +78,6 @@ const TableStickyHeader = (props) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  console.log(tablerecord, "reddd");
 
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -108,7 +105,6 @@ const TableStickyHeader = (props) => {
     axios.get("https://nfttrader1.herokuapp.com/student").then((res) => {
       const persons = res.data.User_Data;
       if (persons) {
-        console.log(persons);
         setTableData(persons);
         setLoading(false);
       }
@@ -131,10 +127,8 @@ const TableStickyHeader = (props) => {
   };
 
   const ClickHandler = (id, e) => {
-    console.log(id, "id");
     const NewArray = tableData?.map((e) => {
       if (id === e._id) {
-        console.log(id, "id");
         // axios.delete(`http://localhost:5000/student/${id}`).then((res) => {
         axios
           .delete(`https://nfttrader1.herokuapp.com/student/${id}`)
