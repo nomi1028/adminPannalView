@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { Grid } from "@mui/material";
 import FormLayoutsSeparator from "./Form";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 // import img from "./USD_Coin_icon.webp";
 
@@ -15,6 +16,8 @@ export default function MediaCard({
   adress,
   makeradress,
   Tradenbr,
+  takerData,
+  setValue,
 }) {
   const [takerAssets, SetTakeAssets] = React.useState();
   const record = [
@@ -32,10 +35,14 @@ export default function MediaCard({
   React.useEffect(() => {
     record.map((data) => {
       if (data.tokenadress == adress) {
-        SetTakeAssets(data);
+        // SetTakeAssets(data);
       }
     });
+    if (takerData) {
+      SetTakeAssets(takerData);
+    }
   }, [adress]);
+  console.log(adress, "takerData");
 
   return (
     <>
@@ -45,6 +52,21 @@ export default function MediaCard({
         lg={12}
         // display={"flex"}
       >
+        <Typography
+          onClick={() => setValue(true)}
+          sx={{
+            background: "black",
+            color: "white",
+            cursor: "pointer",
+            paddingX: "15px",
+            paddingY: "7px",
+            borderRadius: "15px",
+            // diplay: "flex",
+            // alignItems: "center",
+          }}
+        >
+          <ArrowBackIcon />
+        </Typography>
         <Grid
           item
           container
@@ -52,8 +74,9 @@ export default function MediaCard({
           sm={12}
           lg={12}
           sx={{ paddingX: "70px", paddingY: "20px" }}
+          spacing={3}
         >
-          <Grid item md={6} sm={6} lg={6}>
+          <Grid item md={5} sm={12} lg={5}>
             <Card
               sx={{
                 maxWidth: 445,
@@ -76,7 +99,7 @@ export default function MediaCard({
                     display: "inline",
                   }}
                 >
-                  {takerAssets?.name}
+                  {takerData?.name}
                 </Typography>
                 {/* <Typography
                   variant="body2"
@@ -95,7 +118,7 @@ export default function MediaCard({
                   <CardMedia
                     component="img"
                     height="160"
-                    image={takerAssets?.image}
+                    image={takerData?.image_url}
                     alt="green iguana"
                   />
                 </Typography>
@@ -104,18 +127,19 @@ export default function MediaCard({
                   color="text.secondary"
                   sx={{ width: "50%" }}
                 >
-                  ID:1.00 USD Amount:1.00 USD
+                  {/* ID:1.00 USD Amount:1.00 USD */}
                 </Typography>
               </Typography>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {takerAssets?.tokenadress}
+                  {/* {takerAssets?.tokenadress} */}
+                  {adress}
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
 
-          <Grid item md={6} sm={6} lg={6}>
+          <Grid item md={5} sm={12} lg={5}>
             <Card
               sx={{
                 maxWidth: 445,
@@ -140,13 +164,13 @@ export default function MediaCard({
                 >
                   {SignleData?.name}
                 </Typography>
-                <Typography
+                {/* <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ backgroundColor: "black", color: "white" }}
                 >
                   Lizards are a widespread group of
-                </Typography>
+                </Typography> */}
               </CardContent>
 
               <Typography sx={{ display: "flex" }}>
@@ -161,13 +185,13 @@ export default function MediaCard({
                     alt="green iguana"
                   />
                 </Typography>
-                <Typography
+                {/* <Typography
                   variant="body2"
                   color="text.secondary"
                   sx={{ width: "50%" }}
                 >
                   ID:1.00 USD Amount:1.00 USD
-                </Typography>
+                </Typography> */}
               </Typography>
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -216,6 +240,7 @@ export default function MediaCard({
               SignleData={SignleData}
               adress={adress}
               Tradenbr={Tradenbr}
+              makeradress={makeradress}
             />
           )}
         </Grid>

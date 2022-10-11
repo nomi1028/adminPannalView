@@ -17,6 +17,7 @@ export default function MainCard({
   setAdress,
   setmakerAdress,
   setTradenbr,
+  setTakerDataa,
 }) {
   const [id, setId] = React.useState();
   const [makerType, setMakerType] = React.useState();
@@ -164,26 +165,34 @@ export default function MainCard({
         )
         .then((resp) => {
           setWantData(JSON.parse(resp.data));
+          if (tokenAdress?.length === 46) {
+            setTakerData(JSON.parse(resp.data));
+            // setTakerDataa(JSON.parse(resp.data));
+          }
         });
     }
   }, [id, metaid]);
   const record = [
     {
       tokenadress: "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-      image: "/ether.png",
+      image_url: "/ether.png",
       name: "Wrap ETHER",
     },
     {
       tokenadress: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      image: "/USD_Coin_icon.webp",
+      image_url: "/USD_Coin_icon.webp",
       name: "USD Coin",
     },
   ];
   React.useEffect(() => {
     if (tokenAdress) {
       record.map((data) => {
-        if (data.tokenadress == tokenAdress) {
-          setTakerData(data);
+        if (tokenAdress?.length === 46) {
+        } else {
+          if (data.tokenadress == tokenAdress) {
+            setTakerData(data);
+            // setTakerDataa(data);
+          }
         }
       });
     }
@@ -201,6 +210,7 @@ export default function MainCard({
     setAdress(tokenAdress);
     setmakerAdress(makeTokenAdress);
     setTradenbr(tradecode);
+    setTakerDataa(taker);
   };
   return (
     <>
@@ -248,14 +258,14 @@ export default function MainCard({
                     <CardMedia
                       component="img"
                       height="45"
-                      image={wantData?.image_url}
+                      image={taker?.image_url}
                       alt="green iguana"
                     />
                   </Typography>
                   <Typography sx={{ width: "70%", paddingLeft: "5px" }}>
                     <Typography variant="h6" sx={{ color: "black" }}>
                       {/* {Data?.name} */}
-                      {wantData?.name}
+                      {taker?.name}
                     </Typography>
                     {/* <Typography variant="body2">USD Coin</Typography> */}
                     <Typography
@@ -285,7 +295,7 @@ export default function MainCard({
                     <CardMedia
                       component="img"
                       height="45"
-                      image={taker?.image}
+                      image={taker?.image_url}
                       alt="green iguana"
                     />
                   </Typography>

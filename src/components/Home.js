@@ -18,9 +18,11 @@ function Home() {
   const [Value, setValue] = React.useState(true);
   const [SignleData, setSingleData] = React.useState();
   const [Tradenbr, setTradenbr] = React.useState();
+  const [takerData, setTakerDataa] = React.useState();
 
   const { active, account, library, connector, activate, deactivate } =
     useWeb3React();
+  console.log(adress, makeradress, "milty ha");
 
   var array = [2, 4, 6, 8];
   // var arrayobj = [
@@ -171,6 +173,7 @@ function Home() {
                           setAdress={setAdress}
                           setmakerAdress={setmakerAdress}
                           setTradenbr={setTradenbr}
+                          setTakerDataa={setTakerDataa}
                         />
                       </>
                     );
@@ -183,6 +186,8 @@ function Home() {
                   adress={adress}
                   makeradress={makeradress}
                   Tradenbr={Tradenbr}
+                  takerData={takerData}
+                  setValue={setValue}
                 />
               </>
             )}

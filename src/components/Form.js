@@ -43,6 +43,7 @@ const FormLayoutsSeparator = ({
   SignleData,
   adress,
   Tradenbr,
+  makeradress,
 }) => {
   const navigate = useNavigate();
   // ** States
@@ -52,12 +53,12 @@ const FormLayoutsSeparator = ({
   const [makerImageURL, setMakerImageURL] = useState(
     SignleData?.image_preview_url
   );
-  const [takerImageURL, setTakerImageURL] = useState(takerAssets?.image);
+  const [takerImageURL, setTakerImageURL] = useState(takerAssets?.image_url);
 
   const [nftnname, setNftnname] = useState(SignleData?.name);
   const [Tokenname, setTokenname] = useState(takerAssets?.name);
-  const [Coinname, setCoinname] = useState(takerAssets?.tokenadress);
-  const [Nftadress, setNftadress] = useState(adress);
+  const [Coinname, setCoinname] = useState(adress);
+  const [Nftadress, setNftadress] = useState(makeradress);
   // const [Tokenname, setTokenname] = useState(takerAssets?.name);
   const [companyname, setCompanyname] = useState(takerAssets?.name);
 
@@ -69,6 +70,7 @@ const FormLayoutsSeparator = ({
   const handleSelectChange = (event) => {
     setCategory(event.target.value);
   };
+  console.log(adress);
 
   const submit = async (event) => {
     formData.append("nftnname", nftnname);
