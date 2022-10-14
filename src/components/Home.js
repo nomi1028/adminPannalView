@@ -19,6 +19,7 @@ function Home() {
   const [SignleData, setSingleData] = React.useState();
   const [Tradenbr, setTradenbr] = React.useState();
   const [takerData, setTakerDataa] = React.useState();
+  const [iconUrl, setIconURL] = React.useState();
 
   const { active, account, library, connector, activate, deactivate } =
     useWeb3React();
@@ -114,6 +115,7 @@ function Home() {
                   tempArray.push(data);
                 });
               }
+              console.log(tempArray, "tempAraay");
               setData(tempArray);
             });
         });
@@ -174,6 +176,7 @@ function Home() {
                           setmakerAdress={setmakerAdress}
                           setTradenbr={setTradenbr}
                           setTakerDataa={setTakerDataa}
+                          setIconURL={setIconURL}
                         />
                       </>
                     );
@@ -188,6 +191,7 @@ function Home() {
                   Tradenbr={Tradenbr}
                   takerData={takerData}
                   setValue={setValue}
+                  iconUrl={iconUrl}
                 />
               </>
             )}

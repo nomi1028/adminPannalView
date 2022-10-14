@@ -18,6 +18,7 @@ export default function MediaCard({
   Tradenbr,
   takerData,
   setValue,
+  iconUrl,
 }) {
   const [takerAssets, SetTakeAssets] = React.useState();
   const record = [
@@ -32,6 +33,7 @@ export default function MediaCard({
       name: "USD Coin",
     },
   ];
+
   React.useEffect(() => {
     record.map((data) => {
       if (data.tokenadress == adress) {
@@ -42,7 +44,7 @@ export default function MediaCard({
       SetTakeAssets(takerData);
     }
   }, [adress]);
-  console.log(adress, "takerData");
+  console.log(takerData, "takerData");
 
   return (
     <>
@@ -241,6 +243,7 @@ export default function MediaCard({
               adress={adress}
               Tradenbr={Tradenbr}
               makeradress={makeradress}
+              iconUrl={iconUrl}
             />
           )}
         </Grid>

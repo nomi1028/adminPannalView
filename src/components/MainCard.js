@@ -18,6 +18,7 @@ export default function MainCard({
   setmakerAdress,
   setTradenbr,
   setTakerDataa,
+  setIconURL,
 }) {
   const [id, setId] = React.useState();
   const [makerType, setMakerType] = React.useState();
@@ -36,6 +37,7 @@ export default function MainCard({
   React.useEffect(() => {
     let variable = cardData?.HaveAssets?.slice(0, 42);
     let metamaskid = cardData?.HaveAssets?.slice(42);
+    setIconURL(cardData?.TTL);
 
     setWantVariable(cardData?.WantAssets?.slice(0, 42));
     setWantMetamaskid(cardData?.WantAssets?.slice(42));

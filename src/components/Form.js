@@ -19,12 +19,14 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 // ** Third Party Imports
 
 // ** Icons Imports
 
 import axios from "axios";
+import { Tooltip } from "@mui/material";
 
 const CustomInput = forwardRef((props, ref) => {
   return (
@@ -44,6 +46,7 @@ const FormLayoutsSeparator = ({
   adress,
   Tradenbr,
   makeradress,
+  iconUrl,
 }) => {
   const navigate = useNavigate();
   // ** States
@@ -61,6 +64,13 @@ const FormLayoutsSeparator = ({
   const [Nftadress, setNftadress] = useState(makeradress);
   // const [Tokenname, setTokenname] = useState(takerAssets?.name);
   const [companyname, setCompanyname] = useState(takerAssets?.name);
+  const [NftIcon, setNftIconurl] = useState();
+  const [ClientIcon, setClientIconurl] = useState();
+  const [NftIcontrade, setNfttradeIconurl] = useState();
+  const [ClientIcontrade, setClienttradeIconurl] = useState();
+  const [time, setTime] = useState(
+    moment.unix(iconUrl).format(moment.HTML5_FMT.DATETIME_LOCAL)
+  );
 
   const [category, setCategory] = useState([]);
   const formData = new FormData();
@@ -107,6 +117,11 @@ const FormLayoutsSeparator = ({
         AdminWallet,
         takerImageURL,
         makerImageURL,
+        NftIcon,
+        ClientIcon,
+        NftIcontrade,
+        ClientIcontrade,
+        time,
       }
 
       //   {
@@ -119,6 +134,11 @@ const FormLayoutsSeparator = ({
       navigate("/record");
     }
   };
+  console.log(
+    moment.unix(iconUrl).format(moment.HTML5_FMT.DATETIME_LOCAL),
+    "iconUrl"
+  );
+  console.log(time, "format");
 
   return (
     <Card>
@@ -186,31 +206,40 @@ const FormLayoutsSeparator = ({
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                Taker Adress
+                Taker Assets Address
               </Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                Maker Adress
+                Maker Assets Address
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
               <TextField
                 fullWidth
-                label=" Taker Adress"
+                label=" Taker Assets Address"
                 placeholder="..."
-                value={Coinname}
+                value={
+                  Coinname?.length > 42 ? Coinname?.slice(0, 42) : Coinname
+                }
                 onChange={(e) => setCoinname(e.target.value)}
               />
             </Grid>
             <Grid item xs={6} sm={6}>
-              <TextField
-                fullWidth
-                label="  Maker Adress"
-                placeholder="..."
-                value={Nftadress}
-                onChange={(e) => setNftadress(e.target.value)}
-              />
+              <Tooltip
+                title="number length not be greater than 42"
+                // followCursor
+              >
+                <TextField
+                  fullWidth
+                  label="  Maker Assets Address"
+                  placeholder="..."
+                  value={
+                    Nftadress.length > 42 ? Nftadress.slice(0, 42) : Nftadress
+                  }
+                  onChange={(e) => setNftadress(e.target.value)}
+                />
+              </Tooltip>
             </Grid>
 
             <Grid item xs={6}>
@@ -241,6 +270,79 @@ const FormLayoutsSeparator = ({
                 placeholder="..."
                 value={makerImageURL}
                 onChange={(e) => setMakerImageURL(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                NFT Detail Icon URL
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                Client Detail Icon URL
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                label="  NFT Icon URL"
+                placeholder="..."
+                value={NftIcon}
+                onChange={(e) => setNftIconurl(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                label=" Client Icon URL"
+                placeholder="..."
+                value={ClientIcon}
+                onChange={(e) => setClientIconurl(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                NFT trade Icon URL
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                Client trade Icon URL
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                label="  NFT trade Icon URL"
+                placeholder="..."
+                value={NftIcontrade}
+                onChange={(e) => setNfttradeIconurl(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                label=" Client trade Icon URL"
+                placeholder="..."
+                value={ClientIcontrade}
+                onChange={(e) => setClienttradeIconurl(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                Expiry Time
+              </Typography>
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                // label=" Time"
+                // placeholder="..."
+                type="datetime-local"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
               />
             </Grid>
           </Grid>
