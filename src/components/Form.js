@@ -65,6 +65,7 @@ const FormLayoutsSeparator = ({
   // const [Tokenname, setTokenname] = useState(takerAssets?.name);
   const [companyname, setCompanyname] = useState(takerAssets?.name);
   const [NftIcon, setNftIconurl] = useState();
+  const [Eth, setEth] = useState();
   const [ClientIcon, setClientIconurl] = useState();
   const [NftIcontrade, setNfttradeIconurl] = useState();
   const [ClientIcontrade, setClienttradeIconurl] = useState();
@@ -122,6 +123,7 @@ const FormLayoutsSeparator = ({
         NftIcontrade,
         ClientIcontrade,
         time,
+        Eth,
       }
 
       //   {
@@ -330,9 +332,14 @@ const FormLayoutsSeparator = ({
                 onChange={(e) => setClienttradeIconurl(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
                 Expiry Time
+              </Typography>
+            </Grid>
+            <Grid item xs={6}>
+              <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                Add Eth
               </Typography>
             </Grid>
             <Grid item xs={6} sm={6}>
@@ -343,6 +350,17 @@ const FormLayoutsSeparator = ({
                 type="datetime-local"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={6} sm={6}>
+              <TextField
+                fullWidth
+                // label=" Time"
+                // placeholder="..."
+                type="text"
+                value={Eth}
+                onChange={(e) => setEth(e.target.value)}
               />
             </Grid>
           </Grid>
