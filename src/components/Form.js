@@ -120,8 +120,8 @@ const FormLayoutsSeparator = ({
         makerImageURL,
         NftIcon,
         ClientIcon,
-        NftIcontrade,
-        ClientIcontrade,
+        // NftIcontrade,
+        // ClientIcontrade,
         time,
         Eth,
       }
@@ -303,7 +303,7 @@ const FormLayoutsSeparator = ({
                 onChange={(e) => setClientIconurl(e.target.value)}
               />
             </Grid>
-            <Grid item xs={6}>
+            {/* <Grid item xs={6}>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
                 NFT trade Icon URL
               </Typography>
@@ -331,7 +331,7 @@ const FormLayoutsSeparator = ({
                 value={ClientIcontrade}
                 onChange={(e) => setClienttradeIconurl(e.target.value)}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={6}>
               <Typography variant="body2" sx={{ fontWeight: 600 }}>
                 Expiry Time

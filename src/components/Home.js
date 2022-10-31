@@ -36,10 +36,18 @@ function Home() {
   // var position = 2;
 
   useEffect(() => {
-    var array2 = [];
-    var array3 = [];
+    //     var anotherArray=[]
+    // tempArray.map((data,i)=>{
+    //     var nestData=1;
+    //     tempArray.map((newData,j)=>{
+    //       if(i !==j){
+    //        nestData =nestData * tempArray[j];
+    //       }
+    //     })
+    //    anotherArray.push(nestData)
+    // })
+    // console.log(anotherArray)
     // array.map((data) => {
-
     // });
     // arrayobj.map((data) => {
     //   let exist = true;
@@ -53,7 +61,6 @@ function Home() {
     //   }
     // });
     // console.log(array2, "array2");
-
     // for (let i = array.length - 1; i > 0; i--) {
     //   if (i >= 2) {
     //     array[i + 1] = array[i];
